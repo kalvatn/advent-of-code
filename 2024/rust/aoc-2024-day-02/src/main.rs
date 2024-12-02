@@ -1,16 +1,6 @@
+use lib::read_lines_from_file;
+use lib::read_lines_from_string;
 use std::env;
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
-
-fn read_lines<P>(filename: P) -> io::Result<Vec<String>>
-where
-    P: AsRef<Path>,
-{
-    let file = File::open(filename)?;
-    let buf_reader = io::BufReader::new(file);
-    buf_reader.lines().collect()
-}
 
 const TEST_INPUT: &str = r#"
 7 6 4 2 1
@@ -23,14 +13,10 @@ const TEST_INPUT: &str = r#"
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let lines: Vec<String> = if args.len() < 2 {
-        TEST_INPUT.lines().map(|s| s.to_string()).filter(|x| !x.is_empty()).collect()
+    let lines = if args.len() < 2 {
+        read_lines_from_string(TEST_INPUT)
     } else {
-        let input_path = &args[1];
-        read_lines(input_path).unwrap_or_else(|e| {
-            println!("Error reading file: {}", e);
-            std::process::exit(1)
-        })
+        read_lines_from_file(&args[1]).unwrap()
     };
     let levels: Vec<Vec<i32>> = lines.iter()
         .map(|line| line.split_whitespace().map(|s| s.parse().unwrap()).collect())

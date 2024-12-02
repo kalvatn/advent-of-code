@@ -1,7 +1,7 @@
 [workspace]
 
 members = [
-  "aoc-2024-day-01"
-, "aoc-2024-day-02"]
+    "aoc-2024-day-01"
+    , "aoc-2024-day-02", "lib"]
 
 resolver = "2"

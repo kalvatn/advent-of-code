@@ -1,17 +1,8 @@
+use lib::read_lines_from_file;
+use lib::read_lines_from_string;
 use std::collections::HashMap;
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
 use std::env;
 
-fn read_lines<P>(filename: P) -> io::Result<Vec<String>>
-where
-    P: AsRef<Path>,
-{
-    let file = File::open(filename)?;
-    let buf_reader = io::BufReader::new(file);
-    buf_reader.lines().collect()
-}
 
 const TEST_INPUT: &str = r#"
 3   4
@@ -24,14 +15,10 @@ const TEST_INPUT: &str = r#"
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let lines: Vec<String> = if args.len() < 2 {
-        TEST_INPUT.lines().map(|s| s.to_string()).collect()
+    let lines = if args.len() < 2 {
+        read_lines_from_string(TEST_INPUT)
     } else {
-        let input_path = &args[1];
-        read_lines(input_path).unwrap_or_else(|e| {
-            println!("Error reading file: {}", e);
-            std::process::exit(1)
-        })
+        read_lines_from_file(&args[1]).unwrap()
     };
 
     let mut left: Vec<i32> = Vec::new();
@@ -41,10 +28,8 @@ fn main() {
         let numbers: Vec<i32> = line.split_whitespace()
             .map(|s| s.parse().unwrap())
             .collect();
-        if numbers.len() == 2 {
-            left.push(numbers[0]);
-            right.push(numbers[1]);
-        }
+        left.push(numbers[0]);
+        right.push(numbers[1]);
     }
     left.sort();
     right.sort();
