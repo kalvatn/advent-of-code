@@ -2,7 +2,7 @@ use lib::read_lines_from_file;
 use lib::read_lines_from_string;
 use std::collections::HashMap;
 use std::env;
-
+use std::time::Instant;
 
 const TEST_INPUT: &str = r#"
 3   4
@@ -14,6 +14,7 @@ const TEST_INPUT: &str = r#"
 "#;
 
 fn main() {
+    let timer = Instant::now();
     let args: Vec<String> = env::args().collect();
     let lines = if args.len() < 2 {
         read_lines_from_string(TEST_INPUT)
@@ -53,4 +54,5 @@ fn main() {
         }
     }
     println!("Part 2: {}", similarity);
+    println!("Time: {}ms ({}µs)", timer.elapsed().as_millis(), timer.elapsed().as_micros());
 }
