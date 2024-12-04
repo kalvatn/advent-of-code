@@ -1,0 +1,8 @@
+[package]
+name = "aoc-2024-day-04"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lib = { path = "../lib" }
+regex = "1.11.1"
