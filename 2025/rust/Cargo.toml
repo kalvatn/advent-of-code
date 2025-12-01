@@ -1,6 +1,6 @@
 [workspace]
 
-members = [
+members = ["aoc-2025-day-01",
     "lib"
     ]
 
