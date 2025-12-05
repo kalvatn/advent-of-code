@@ -99,7 +99,7 @@ fn main() {
     println!("Time: {}ms ({}µs)", timer.elapsed().as_millis(), timer.elapsed().as_micros());
 }
 
-fn remove(grid: &mut Vec<Vec<char>>, mut count: usize) -> usize {
+fn remove(grid: &mut Vec<Vec<char>>, count: usize) -> usize {
     let mut removable = vec![];
     for row in 0..grid.len() {
         for col in 0..grid[row].len() {

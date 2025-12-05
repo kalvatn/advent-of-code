@@ -1,7 +1,6 @@
 use lib::read_lines_from_file;
 use lib::read_lines_from_string;
 use std::env;
-use std::ops::Index;
 use std::time::Instant;
 
 const TEST_INPUT: &str = r#"
