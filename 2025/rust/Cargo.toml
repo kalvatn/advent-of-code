@@ -1,6 +1,6 @@
 [workspace]
 
-members = ["aoc-2025-day-01", "aoc-2025-day-02", "aoc-2025-day-03", "aoc-2025-day-04",
+members = ["aoc-2025-day-01", "aoc-2025-day-02", "aoc-2025-day-03", "aoc-2025-day-04", "aoc-2025-day-05",
     "lib"
     ]
 
